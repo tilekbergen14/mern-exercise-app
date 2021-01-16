@@ -21,7 +21,9 @@ class AddUsers extends Component {
         axios.post('http://localhost:5000/users/add', user)
             .then(result => console.log(result))
             .catch(err => console.log(err.message))
-
+        axios.get('http://localhost:5000/users')
+            .then(result => this.setState({users: result.data}))
+            .catch(err => console.log(err.message))
         this.setState({user: ""})
     }
     render() { 
@@ -37,9 +39,13 @@ class AddUsers extends Component {
                         </div>
                     </div>
                 </form>
-                <ul className="list-group">
+                <ul className="list-group mb-4">
                     {this.state.users.length !== 0 ? users : "Loading..."}
                 </ul>
+                <div className="d-flex justify-content-center">
+                    <button className="btn btn-secondary mx-2">Previous</button>
+                    <button className="btn btn-primary mx-2">Next</button>
+                </div>
             </div>
          );
     }

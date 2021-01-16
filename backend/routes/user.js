@@ -1,9 +1,9 @@
 const express = require("express")
-const mongoose = require("mongoose")
 const Users = require("../models/user")
 const router = express.Router()
 
 router.get("/", (req, res) => {
+    console.dir(req.query)
     Users.find()
         .then(result => res.json(result))
         .catch(error => res.status(404).json("Couldn't find users"))

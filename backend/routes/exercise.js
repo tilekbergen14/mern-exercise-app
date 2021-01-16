@@ -3,16 +3,18 @@ const router = express.Router()
 
 const Exercises = require("../models/exercise")
 
+const maxInfos = 10;
+const pages = 2;
 router.get("/", (req, res) => {
     Exercises.find()
         .then(result => res.json(result))
-        .catch(() => res.json("Couldn't find exercises"))
+        .catch((error) => res.status(400).json(error.message))
 })
 
 router.get("/:id", (req, res) => {
     Exercises.findById(req.params.id)
         .then(result => res.json(result))
-        .catch(() => res.json("Couldn't find exercise"))
+        .catch((error) => res.status(400).json(error.message))
 })
 
 router.post("/add", (req, res) => {
@@ -39,14 +41,14 @@ router.put("/:id", (req, res) => {
                 date: Date(date)
             }
         }
-    ).then(() => res.json("Updated succesfully"))
-     .catch(() => res.json("Couldn't update"))
+    ).then((result) => res.json(result))
+     .catch((error) => res.json(error.message))
 })
 
 router.delete("/:id", (req, res) => {
     Exercises.findByIdAndDelete(req.params.id)
-        .then(() => res.json("Deleted succesfully"))
-        .catch(() => res.json("Couldn't find specified exercise"))
+        .then(result => res.json(result))
+        .catch(error => res.json(error.message))
 })
 
 module.exports = router

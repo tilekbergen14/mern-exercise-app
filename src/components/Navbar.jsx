@@ -14,7 +14,7 @@ export default function Navbar() {
           <Link to="/add" className="nav-link">Create Exercise Log</Link>
           </li>
           <li className="navbar-item mx-3">
-          <Link to="/user" className="nav-link">Create User</Link>
+          <Link to="/users" className="nav-link">Create User</Link>
           </li>
         </ul>
         </div>
